@@ -1,8 +1,28 @@
 local OrionLib = loadstring(game:HttpGet("https://pastebin.com/raw/NMEHkVTb"))()
-local Window = OrionLib:MakeWindow({Name = "VIP Turtle Hub V3", HidePremium = false, SaveConfig = false, ConfigFolder = "OrionTest"})
+local Window = OrionLib:MakeWindow({Name = "VIP Turtle Hub V3 By Fahri & Turtle Team", HidePremium = false, SaveConfig = false, ConfigFolder = "OrionTest"})
 local client = game.Players.LocalPlayer
 local workspace = game:GetService("Workspace")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local lootgame = {
+  a = "",
+  b = 0,
+  c = false
+}
+local mt = getrawmetatable(game);
+setreadonly(mt,false)
+local namecall = mt.__namecall
+
+mt.__namecall = newcclosure(function(self, ...)
+	local Method = getnamecallmethod()
+	local Args = {...}
+
+	if Method == 'InvokeServer' and self.Name == 'LaunchFinished' then
+        lootgame.a = Args[1]
+        lootgame.b = Args[2]
+        lootgame.c = Args[3]
+end
+	return namecall(self, ...) 
+end)
 
 local world = {}
 local egg = {}
@@ -50,6 +70,18 @@ T1:AddToggle({
         for i,v in pairs(workspace["DROPS"]:GetChildren()) do
           game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["DropService"]["RE"]["PickupDrop"]:FireServer({v.Name})
         end
+      end
+  end    
+})
+
+T1:AddToggle({
+  Name = "Auto Collect money",
+  Default = false,
+  Callback = function(Value)
+     _G.cm = Value
+      while wait() do
+        if _G.cm == false then break end
+        game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["LauncherService"]["RF"]["LaunchFinished"]:InvokeServer(lootgame.a,lootgame.b,lootgame.c)
       end
   end    
 })
