@@ -8,6 +8,7 @@ local lootgame = {
   b = 0,
   c = false
 }
+local up = 0
 local mt = getrawmetatable(game);
 setreadonly(mt,false)
 local namecall = mt.__namecall
@@ -17,10 +18,12 @@ mt.__namecall = newcclosure(function(self, ...)
 	local Args = {...}
 
 	if Method == 'InvokeServer' and self.Name == 'LaunchFinished' then
-        lootgame.a = Args[1]
-        lootgame.b = Args[2]
-        lootgame.c = Args[3]
-end
+                lootgame.a = Args[1]
+                lootgame.b = Args[2]
+                --lootgame.c = Args[3]
+	elseif Method == 'InvokeServer' and self.Name == 'UpgradeLauncher' then
+		up = Args[1]
+        end
 	return namecall(self, ...) 
 end)
 
@@ -75,13 +78,49 @@ T1:AddToggle({
 })
 
 T1:AddToggle({
-  Name = "Auto Collect money",
+  Name = "Auto Collect money [ Launch first ]",
   Default = false,
   Callback = function(Value)
      _G.cm = Value
       while wait() do
         if _G.cm == false then break end
         game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["LauncherService"]["RF"]["LaunchFinished"]:InvokeServer(lootgame.a,lootgame.b,lootgame.c)
+      end
+  end    
+})
+
+T1:AddToggle({
+  Name = "Auto Rebirth",
+  Default = false,
+  Callback = function(Value)
+     _G.rbr = Value
+      while wait() do
+        if _G.rbr == false then break end
+        game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["RebirthService"]["RF"]["Rebirth"]:InvokeServer()
+      end
+  end    
+})
+
+T1:AddToggle({
+  Name = "Auto Hit pinata",
+  Default = false,
+  Callback = function(Value)
+     _G.hpinata = Value
+      while wait() do
+        if _G.hpinata == false then break end
+        game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["SpacePinataService"]["RE"]["HitPinata"]:FireServer()
+      end
+  end    
+})
+
+T1:AddToggle({
+  Name = "Auto Upgrade [ UP first ]",
+  Default = false,
+  Callback = function(Value)
+     _G.upgl = Value
+      while wait() do
+        if _G.upgl == false then break end
+        game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["LauncherService"]["RF"]["UpgradeLauncher"]:InvokeServer(up)
       end
   end    
 })
