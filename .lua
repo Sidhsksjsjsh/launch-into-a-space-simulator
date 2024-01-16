@@ -4,6 +4,61 @@ local client = game.Players.LocalPlayer
 local workspace = game:GetService("Workspace")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TextChatService = game:GetService("TextChatService")
+local HTMLcolors = { 
+    ["Red"] = "rgb(255, 0, 0)",
+    ["Yellow"] = "rgb(255, 255, 0)",
+    ["Orange"] = "rgb(255, 165, 0)",
+    ["Pink"] = "rgb(255, 192, 203)",
+    ["Light Green"] = "rgb(50, 205, 50)",
+    ["Sky Blue"] = "rgb(135, 206, 235)",
+    ["Black"] = "rgb(0, 0, 0)",
+    ["Dark Red"] = "rgb(139, 0, 0)",
+    ["Dark Green"] = "rgb(0, 100, 0)",
+    ["Dark Blue"] = "rgb(0, 0, 139)",
+    ["Gray"] = "rgb(128, 128, 128)",
+    ["Dark Purple"] = "rgb(128, 0, 128)",
+    ["Dark Brown"] = "rgb(101, 67, 33)",
+    ["Dark Purple"] = "rgb(128, 0, 128)",
+    ["Dark Blue"] = "rgb(0, 0, 128)",
+    ["Brown"] = "rgb(139, 69, 19)",
+    ["Purple"] = "rgb(128, 0, 128)",
+    ["Blue"] = "rgb(0, 0, 255)",
+    ["White"] = "rgb(255, 255, 255)",
+    ["Green"] = "rgb(0, 255, 0)",
+    ["Bright Blue"] = "rgb(173, 216, 230)",
+    ["Lavender"] = "rgb(230, 230, 250)",
+    ["Peach"] = "rgb(255, 218, 185)",
+    ["Teal"] = "rgb(0, 128, 128)",
+    ["Salmon"] = "rgb(250, 128, 114)",
+    ["Gold"] = "rgb(255, 215, 0)",
+    ["Dark Slate Gray"] = "rgb(47, 79, 79)",
+    ["Slate Blue"] = "rgb(106, 90, 205)",
+    ["Cadet Blue"] = "rgb(95, 158, 160)",
+    ["Chocolate"] = "rgb(210, 105, 30)",
+    ["Forest Green"] = "rgb(34, 139, 34)",
+    ["Steel Blue"] = "rgb(70, 130, 180)",
+    ["Olive"] = "rgb(128, 128, 0)",
+    ["Tomato"] = "rgb(255, 99, 71)",
+    ["Khaki"] = "rgb(240, 230, 140)",
+    ["Peru"] = "rgb(205, 133, 63)",
+    ["Royal Blue"] = "rgb(65, 105, 225)",
+    ["Medium Purple"] = "rgb(147, 112, 219)",
+    ["Blue Violet"] = "rgb(138, 43, 226)",
+    ["Cornflower Blue"] = "rgb(100, 149, 237)",
+    ["Indian Red"] = "rgb(205, 92, 92)",
+    ["Medium Violet Red"] = "rgb(199, 21, 133)",
+    ["Pale Violet Red"] = "rgb(219, 112, 147)",
+    ["Medium Sea Green"] = "rgb(60, 179, 113)",
+    ["Yellow Green"] = "rgb(154, 205, 50)",
+    ["Sky Blue"] = "rgb(135, 206, 235)",
+    ["Medium Slate Blue"] = "rgb(123, 104, 238)",
+    ["Medium Turquoise"] = "rgb(72, 209, 204)",
+    ["Light Sea Green"] = "rgb(32, 178, 170)",
+    ["Dark Olive Green"] = "rgb(85, 107, 47)",
+    ["Medium Orchid"] = "rgb(186, 85, 211)",
+    ["Slate Gray"] = "rgb(112, 128, 144)",
+    ["Deep Sky Blue"] = "rgb(0, 191, 255)"
+}
 
 local lootgame = {
   a = "",
@@ -28,6 +83,11 @@ mt.__namecall = newcclosure(function(self, ...)
         end
 	return namecall(self, ...) 
 end)
+
+
+local function fontcolor(str,color)
+      return "<font color='" .. color .. "'>" .. str .. "</font>"
+end
 
 local world = {}
 local egg = {}
@@ -209,11 +269,11 @@ T3:AddToggle({
 
 local function DisplaySystemMessage(player,message)
 	if player.Name == client.Name and message:find("mythic") or message:find("Mythic") then
-		OrionLib:MakeNotification({Name = "Mythic Pet | Congrats:)",Content = "Congratulations! You got a mythical pet!",Image = "rbxassetid://",Time = 7})
+		OrionLib:MakeNotification({Name = fontcolor("Mythic",HTMLcolors["Red"]) .. " Pet | Congrats:)",Content = "Congratulations! You got a " .. fontcolor("Mythic",HTMLcolors["Red"]) .. " pet!",Image = "rbxassetid://",Time = 7})
 	elseif player.Name == client.Name and message:find("divine") or message:find("Divine") then
-		OrionLib:MakeNotification({Name = "Divine Pet | Congrats:)",Content = "Congratulations! You got a divine pet!",Image = "rbxassetid://",Time = 7})
+		OrionLib:MakeNotification({Name = fontcolor("Divine",HTMLcolors["Sky Blue"]) .. " Pet | Congrats:)",Content = "Congratulations! You got a " .. fontcolor("Divine",HTMLcolors["Sky Blue"]) .. " pet!",Image = "rbxassetid://",Time = 7})
 	elseif player.Name == client.Name and message:find("legendary") or message:find("Legendary") then
-		OrionLib:MakeNotification({Name = "Legendary Pet | Congrats:)",Content = "Congratulations! You got a Legendary pet!",Image = "rbxassetid://",Time = 7})
+		OrionLib:MakeNotification({Name = fontcolor("Legendary",HTMLcolors["Yellow"]) .. " Pet | Congrats:)",Content = "Congratulations! You got a " .. fontcolor("Legendary",HTMLcolors["Yellow"]) .. " pet!",Image = "rbxassetid://",Time = 7})
 	end
 end
 
