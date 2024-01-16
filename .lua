@@ -278,4 +278,4 @@ local function DisplaySystemMessage(player,message)
 end
 
 --TextChatService["TextChannels"]["RBXGeneral"]
-TextChatService["TextChannels"]["RBXSystem"].SystemMessageReceived:Connect(DisplaySystemMessage)
+--TextChatService["TextChannels"]["RBXSystem"].SystemMessageReceived:Connect(DisplaySystemMessage)
