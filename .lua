@@ -72,6 +72,7 @@ T1:AddToggle({
         if _G.strs == false then break end
         for i,v in pairs(workspace["DROPS"]:GetChildren()) do
           game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["DropService"]["RE"]["PickupDrop"]:FireServer({v.Name})
+	  v.Position = CFrame.new(9e9,9e9,9e9)
         end
       end
   end    
@@ -121,6 +122,46 @@ T1:AddToggle({
       while wait() do
         if _G.upgl == false then break end
         game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["LauncherService"]["RF"]["UpgradeLauncher"]:InvokeServer(up)
+      end
+  end    
+})
+
+T1:AddToggle({
+  Name = "Auto spin",
+  Default = false,
+  Callback = function(Value)
+     _G.spin = Value
+      while wait() do
+        if _G.spin == false then break end
+        game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["SpinService"]["RF"]["Spin"]:InvokeServer()
+      end
+  end    
+})
+
+T1:AddToggle({
+  Name = "Auto claim task/quest [ Regular ]",
+  Default = false,
+  Callback = function(Value)
+     _G.cqtr = Value
+      while wait() do
+        if _G.cqtr == false then break end
+        game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["QuestsService"]["RF"]["ClaimReward"]:InvokeServer("Quest1","regular")
+	game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["QuestsService"]["RF"]["ClaimReward"]:InvokeServer("Quest2","regular")
+	game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["QuestsService"]["RF"]["ClaimReward"]:InvokeServer("Quest3","regular")
+      end
+  end    
+})
+
+T1:AddToggle({
+  Name = "Auto claim task/quest [ Premium Only ]",
+  Default = false,
+  Callback = function(Value)
+     _G.cqtp = Value
+      while wait() do
+        if _G.cqtp == false then break end
+        game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["QuestsService"]["RF"]["ClaimReward"]:InvokeServer("Quest1","premium")
+	game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["QuestsService"]["RF"]["ClaimReward"]:InvokeServer("Quest2","premium")
+	game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["QuestsService"]["RF"]["ClaimReward"]:InvokeServer("Quest3","premium")
       end
   end    
 })
