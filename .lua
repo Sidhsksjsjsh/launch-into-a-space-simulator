@@ -134,7 +134,7 @@ T1:AddToggle({
         if _G.strs == false then break end
         for i,v in pairs(workspace["DROPS"]:GetChildren()) do
           game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["DropService"]["RE"]["PickupDrop"]:FireServer({v.Name})
-	  v.Position = CFrame.new(9e9,9e9,9e9)
+	  v.Position = Vector3.new(9e9,9e9,9e9)
         end
       end
   end    
