@@ -3,6 +3,8 @@ local Window = OrionLib:MakeWindow({Name = "VIP Turtle Hub V3 By Fahri & Turtle 
 local client = game.Players.LocalPlayer
 local workspace = game:GetService("Workspace")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local TextChatService = game:GetService("TextChatService")
+
 local lootgame = {
   a = "",
   b = 0,
@@ -202,3 +204,17 @@ T3:AddToggle({
       end
   end    
 })
+
+--OrionLib:MakeNotification({Name = "Mythic Pet | Congrats:)",Content = "Congratulations! You got a mythical pet!",Image = "rbxassetid://",Time = 7})
+
+local function DisplaySystemMessage(player,message)
+	if player.Name == client.Name and message:find("mythic") or message:find("Mythic") then
+		OrionLib:MakeNotification({Name = "Mythic Pet | Congrats:)",Content = "Congratulations! You got a mythical pet!",Image = "rbxassetid://",Time = 7})
+	elseif player.Name == client.Name and message:find("divine") or message:find("Divine") then
+		OrionLib:MakeNotification({Name = "Divine Pet | Congrats:)",Content = "Congratulations! You got a divine pet!",Image = "rbxassetid://",Time = 7})
+	elseif player.Name == client.Name and message:find("legendary") or message:find("Legendary") then
+		OrionLib:MakeNotification({Name = "Legendary Pet | Congrats:)",Content = "Congratulations! You got a Legendary pet!",Image = "rbxassetid://",Time = 7})
+	end
+end
+
+TextChatService["TextChannels"]["RBXSystem"].SystemMessageReceived:Connect(DisplaySystemMessage)
