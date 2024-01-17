@@ -92,7 +92,7 @@ end
 local function talk(str)
 	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync(str)
 end
-
+local a_,b_ = pcall(function()
 local assets = {
 	Pets = {},
 	Launchers = {},
@@ -390,5 +390,8 @@ local function DisplaySystemMessage(player,message)
 	end
 end
 
+if not a_ then
+	OrionLib:MakeNotification({Name = "SCRIPT " .. fontcolor("ERROR",HTMLcolors["Red"]),Content = b_,Image = "rbxassetid://",Time = 7})
+end
 --TextChatService["TextChannels"]["RBXGeneral"]
 --TextChatService["TextChannels"]["RBXSystem"].SystemMessageReceived:Connect(DisplaySystemMessage)
