@@ -4,6 +4,7 @@ local client = game.Players.LocalPlayer
 local workspace = game:GetService("Workspace")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TextChatService = game:GetService("TextChatService")
+local ai = {}
 local HTMLcolors = { 
     ["Red"] = "rgb(255, 0, 0)",
     ["Yellow"] = "rgb(255, 255, 0)",
@@ -89,6 +90,10 @@ local function fontcolor(str,color)
       return "<font color='" .. color .. "'>" .. str .. "</font>"
 end
 
+local function ai.talk(str)
+	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync(str)
+end
+
 local assets = {
 	Pets = {},
 	Launchers = {},
@@ -125,6 +130,61 @@ Icon = "rbxassetid://",
 PremiumOnly = false
 })
 
+local T5 = Window:MakeTab({
+Name = "Sell & Buy",
+Icon = "rbxassetid://",
+PremiumOnly = false
+})
+
+local S1 = T5:AddSection({
+     Name = "SELL PETS"
+})
+
+local S2 = T5:AddSection({
+     Name = "BUY PETS"
+})
+
+S1:AddDropdown({
+  Name = "Select the pet you wanna sell",
+  Default = assets.Pets[1],
+  Options = assets.Pets,
+  Callback = function(Value)
+      _G.forSell_system = Value:lower()
+  end    
+})
+
+S1:AddTextbox({
+  Name = "How much you wanna sell it",
+  Default = "0",
+  TextDisappear = false,
+  Callback = function(Value)
+     _G.forSell_price = Value:upper()
+  end  
+})
+
+S1:AddButton({
+Name = "Say it!",
+Callback = function()
+	ai.talk("selling " .. _G.forSell_system .. " for " .. _G.forSell_price .. " gems")
+   end    
+})
+
+S2:AddDropdown({
+  Name = "Select the pet you wanna buy",
+  Default = assets.Pets[1],
+  Options = assets.Pets,
+  Callback = function(Value)
+      _G.forBuy_system = Value:lower()
+  end    
+})
+
+S2:AddButton({
+Name = "Say it!",
+Callback = function()
+	ai.talk("buying " .. _G.forBuy_system .. ".")
+   end    
+})
+
 T4:AddDropdown({
   Name = "Select pets name",
   Default = assets.Pets[1],
@@ -158,7 +218,7 @@ T1:AddToggle({
      _G.Lch = Value
       while wait() do
         if _G.Lch == false then break end
-        game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["LauncherService"]["RF"]["LaunchBegan"]:InvokeServer(client,false)
+        game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["LauncherService"]["RF"]["LaunchBegan"]:InvokeServer(client,true)
       end
   end    
 })
@@ -291,6 +351,15 @@ T3:AddDropdown({
   end    
 })
 
+T3:AddDropdown({
+  Name = "Hatch amount",
+  Default = "X1",
+  Options = {"X1","X4"},
+  Callback = function(Value)
+      _G.ha = Value
+  end    
+})
+
 T3:AddToggle({
   Name = "Auto Hatch",
   Default = false,
@@ -298,7 +367,13 @@ T3:AddToggle({
      _G.lolhtc = Value
       while wait() do
         if _G.lolhtc == false then break end
-        game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["PetsService"]["RF"]["HatchEgg"]:InvokeServer(_G.eggth,1)
+	if _G.ha == "X1" then
+		game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["PetsService"]["RF"]["HatchEgg"]:InvokeServer(_G.eggth,1)
+	elseif _G.ha == "X4" then
+		game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["PetsService"]["RF"]["HatchEgg"]:InvokeServer(_G.eggth,4)
+	else
+		OrionLib:MakeNotification({Name = fontcolor("Invalid",HTMLcolors["Red"]) .. " hatch mmount",Content = "Hatch amount is " .. fontcolor("INVALID",HTMLcolors["Red"]) .. "! Enter valid hatch amount!",Image = "rbxassetid://",Time = 7})
+	end
       end
   end    
 })
