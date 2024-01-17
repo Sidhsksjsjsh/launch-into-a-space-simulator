@@ -372,8 +372,7 @@ T3:AddToggle({
 	elseif _G.ha == "X4" then
 		game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["PetsService"]["RF"]["HatchEgg"]:InvokeServer(_G.eggth,4)
 	else
-		break
-		OrionLib:MakeNotification({Name = fontcolor("Invalid",HTMLcolors["Red"]) .. " hatch mmount",Content = "Hatch amount is " .. fontcolor("INVALID",HTMLcolors["Red"]) .. "! Enter valid hatch amount!",Image = "rbxassetid://",Time = 7})
+		OrionLib:MakeNotification({Name = fontcolor("Invalid",HTMLcolors["Red"]) .. " hatch amount",Content = "Hatch amount is " .. fontcolor("INVALID",HTMLcolors["Red"]) .. "! Enter a valid hatch amount!",Image = "rbxassetid://",Time = 7})
 	end
       end
   end    
