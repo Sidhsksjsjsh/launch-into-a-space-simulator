@@ -89,11 +89,17 @@ local function fontcolor(str,color)
       return "<font color='" .. color .. "'>" .. str .. "</font>"
 end
 
-local world = {}
-local egg = {}
+local assets = {
+	Pets = {},
+	Launchers = {},
+	Eggs = {},
+	World = {}
+}
 
-OrionLib:AddTable(ReplicatedStorage["Assets"]["Worlds"],world)
-OrionLib:AddTable(ReplicatedStorage["Assets"]["Eggs"],egg)
+OrionLib:AddTable(ReplicatedStorage["Assets"]["Worlds"],assets.World)
+OrionLib:AddTable(ReplicatedStorage["Assets"]["Eggs"],assets.Eggs)
+OrionLib:AddTable(ReplicatedStorage["Assets"]["Pets"],assets.Pets)
+OrionLib:AddTable(ReplicatedStorage["Assets"]["Launchers"],assets.Launchers)
 
 local T1 = Window:MakeTab({
 Name = "Main",
@@ -111,6 +117,38 @@ local T3 = Window:MakeTab({
 Name = "Hatch",
 Icon = "rbxassetid://",
 PremiumOnly = false
+})
+
+local T4 = Window:MakeTab({
+Name = "Merge",
+Icon = "rbxassetid://",
+PremiumOnly = false
+})
+
+T4:AddDropdown({
+  Name = "Select pets name",
+  Default = assets.Pets[1],
+  Options = assets.Pets,
+  Callback = function(Value)
+      _G.merge_system = Value
+  end    
+})
+
+T4:AddDropdown({
+  Name = "Select result",
+  Default = assets.Pets[1],
+  Options = assets.Pets,
+  Callback = function(Value)
+      _G.onMerge_done_merging = Value
+  end    
+})
+
+T4:AddButton({
+Name = "Merge equipped pets",
+Callback = function()
+	local onMerging = workspace["PETS"][client]:GetChildren()
+      	game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["PetsService"]["RF"]["MergePets"]:InvokeServer({onMerging[1],onMerging[1],onMerging[1],onMerging[1],onMerging[1],onMerging[1],onMerging[1],onMerging[1],onMerging[1],onMerging[1]},_G.merge_system,_G.onMerge_done_merging)
+   end    
 })
 
 T1:AddToggle({
@@ -230,8 +268,8 @@ T1:AddToggle({
 
 T2:AddDropdown({
   Name = "Select world",
-  Default = world[1],
-  Options = world,
+  Default = assets.World[1],
+  Options = assets.World,
   Callback = function(Value)
       _G.tps = Value
   end    
@@ -246,8 +284,8 @@ Callback = function()
 
 T3:AddDropdown({
   Name = "Select egg",
-  Default = egg[1],
-  Options = egg,
+  Default = assets.Eggs[1],
+  Options = assets.Eggs,
   Callback = function(Value)
       _G.eggth = Value
   end    
