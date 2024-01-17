@@ -4,7 +4,6 @@ local client = game.Players.LocalPlayer
 local workspace = game:GetService("Workspace")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TextChatService = game:GetService("TextChatService")
-local ai = {}
 local HTMLcolors = { 
     ["Red"] = "rgb(255, 0, 0)",
     ["Yellow"] = "rgb(255, 255, 0)",
@@ -90,7 +89,7 @@ local function fontcolor(str,color)
       return "<font color='" .. color .. "'>" .. str .. "</font>"
 end
 
-local function ai.talk(str)
+local function talk(str)
 	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync(str)
 end
 
@@ -149,7 +148,7 @@ S1:AddDropdown({
   Default = assets.Pets[1],
   Options = assets.Pets,
   Callback = function(Value)
-      _G.forSell_system = Value:lower()
+      _G.forSell_system = Value
   end    
 })
 
@@ -158,14 +157,14 @@ S1:AddTextbox({
   Default = "0",
   TextDisappear = false,
   Callback = function(Value)
-     _G.forSell_price = Value:upper()
+     _G.forSell_price = Value
   end  
 })
 
 S1:AddButton({
 Name = "Say it!",
 Callback = function()
-	ai.talk("selling " .. _G.forSell_system .. " for " .. _G.forSell_price .. " gems")
+	talk("selling " .. _G.forSell_system:lower() .. " for " .. _G.forSell_price:upper() .. " gems")
    end    
 })
 
@@ -174,14 +173,14 @@ S2:AddDropdown({
   Default = assets.Pets[1],
   Options = assets.Pets,
   Callback = function(Value)
-      _G.forBuy_system = Value:lower()
+      _G.forBuy_system = Value
   end    
 })
 
 S2:AddButton({
 Name = "Say it!",
 Callback = function()
-	ai.talk("buying " .. _G.forBuy_system .. ".")
+	talk("buying " .. _G.forBuy_system:lower() .. ".")
    end    
 })
 
@@ -372,6 +371,7 @@ T3:AddToggle({
 	elseif _G.ha == "X4" then
 		game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["PetsService"]["RF"]["HatchEgg"]:InvokeServer(_G.eggth,4)
 	else
+		break
 		OrionLib:MakeNotification({Name = fontcolor("Invalid",HTMLcolors["Red"]) .. " hatch mmount",Content = "Hatch amount is " .. fontcolor("INVALID",HTMLcolors["Red"]) .. "! Enter valid hatch amount!",Image = "rbxassetid://",Time = 7})
 	end
       end
