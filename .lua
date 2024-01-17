@@ -92,6 +92,7 @@ end
 local function talk(str)
 	TextChatService["TextChannels"]["RBXGeneral"]:SendAsync(str)
 end
+
 local a_,b_ = pcall(function()
 local assets = {
 	Pets = {},
@@ -389,6 +390,7 @@ local function DisplaySystemMessage(player,message)
 		OrionLib:MakeNotification({Name = fontcolor("Legendary",HTMLcolors["Yellow"]) .. " Pet | Congrats:)",Content = "Congratulations! You got a " .. fontcolor("Legendary",HTMLcolors["Yellow"]) .. " pet!",Image = "rbxassetid://",Time = 7})
 	end
 end
+end)
 
 if not a_ then
 	OrionLib:MakeNotification({Name = "SCRIPT " .. fontcolor("ERROR",HTMLcolors["Red"]),Content = b_,Image = "rbxassetid://",Time = 7})
