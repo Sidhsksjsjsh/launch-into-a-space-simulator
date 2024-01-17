@@ -126,11 +126,11 @@ T1:AddToggle({
 })
 
 T1:AddToggle({
-  Name = "Auto Collect drops/stars [ delay 0.5 ]",
+  Name = "Auto Collect drops/stars",
   Default = false,
   Callback = function(Value)
      _G.strs = Value
-      while wait(0.5) do
+      while wait() do
         if _G.strs == false then break end
         for i,v in pairs(workspace["DROPS"]:GetChildren()) do
           game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.6.0")["knit"]["Services"]["DropService"]["RE"]["PickupDrop"]:FireServer({v.Name})
